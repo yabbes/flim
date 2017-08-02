@@ -5,6 +5,7 @@ import $ from 'jquery';
 import axios from 'axios';
 
 class App extends Component {
+
   render() {
     return (
       <div className="App">
@@ -13,7 +14,7 @@ class App extends Component {
           <h2>Welcome to Flim-base</h2>
         </div>
         <p className="App-intro">
-          <FilmList />
+          <FilmList query={''}/>
         </p>
       </div>
     );
@@ -25,55 +26,46 @@ export default App;
 class FilmList extends Component {
   constructor(props) {
     super(props);
-    this.getMovieList = this.getMovieList.bind(this);
     this.state = {
-      items: []
+      items: [],
+      initialList: true,
+      query: props.query
     };
   }
 
   getMovieList(name){
+    var results = [];
     axios.get('https://api.themoviedb.org/3/discover/movie?api_key=a8e2ba7b760d6d3d601e43eb696df1ac')
-  .then(function (response) {
-    console.log(response);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+    .then(function (response) {
+      //console.log(response);
+      this.setState({
+        items: response.data.results
+      })
+    }.bind(this))
+    .catch(function (error) {
+      console.log(error);
+    });
+    
   }
 
   componentDidMount() {
-    this.getMovieList();
-    /*fetch('https://api.themoviedb.org/3/movie/550?api_key=a8e2ba7b760d6d3d601e43eb696df1ac')
-    .then(result => result.json())
-    .then(items => this.setState({items}))*/
-    /*
-    let settings = {
-      "async": true,
-      "crossDomain": true,
-      "url": 'https://api.themoviedb.org/3/discover/movie?api_key=a8e2ba7b760d6d3d601e43eb696df1ac',
-      "method": "GET",
-      "headers": {},
-      "data": "{}"
-    };
-    $.ajax(settings)
-    .done((response) => {
-      console.log(response);
-      this.setState({
-        items: response.result,
-      })
-    });
+    if (this.state.initialList) {
+      this.getMovieList();
+    }
+    
 
-    */
   }
 
   render() {
     return (
       <div> <h2>Filmliste:</h2>
         <ul>
-          {this.state.items.length ? 
-          console.log(this.state.items) : 
-            <li>Loading..</li>
+          
+          {this.state.items.length ?
+          	this.state.items.map(item=><li key={item.id}>{item.title}</li>) 
+            : <li>Loading...</li>
           }
+     
         </ul>
       </div>
     )
