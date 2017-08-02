@@ -110,14 +110,15 @@ class FilmList extends Component {
     
 
   }
-
+// let size = this.state.configuration.data.backdrop_sizes[0];
+// let b_url = this.state.configuration.data.base_url
   render() {
     return (
       <div> <h2>Filmliste:</h2>
         <ul>
-          
           {this.state.items.length ?
-          	this.state.items.map(item=><li key={item.id}>{item.title}</li>) 
+          	this.state.items.map(item=><li key={item.id}>{item.title} <img src={this.state.configuration.data.base_url + this.state.configuration.data.backdrop_sizes[0]+ '/'+ item.file_path} alt=""/>
+            </li>) 
             : <li>Loading...</li>
           }
      
