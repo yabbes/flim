@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
+import priv from './config';
 
 class App extends Component {
   constructor() {
@@ -44,9 +45,9 @@ class FilmList extends Component {
   }
 
   getMovieList(name){
-    axios.get('https://api.themoviedb.org/3/discover/movie?api_key=a8e2ba7b760d6d3d601e43eb696df1ac')
+    axios.get('https://api.themoviedb.org/3/discover/movie?api_key=' + priv.API_KEY)
     .then(function (response) {
-      //console.log(response);
+      //console.log(priv.API_KEY);
       this.setState({
         items: response.data.results
       })
@@ -57,7 +58,7 @@ class FilmList extends Component {
     
   }
   searchFor(movie){
-    axios.get('https://api.themoviedb.org/3/search/movie?query=' + movie + '&api_key=a8e2ba7b760d6d3d601e43eb696df1ac')
+    axios.get('https://api.themoviedb.org/3/search/movie?query=' + movie + '&api_key=' + priv.API_KEY)
     .then(function (response) {
       this.setState({
         items: response.data.results
