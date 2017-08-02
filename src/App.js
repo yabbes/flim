@@ -5,12 +5,14 @@ import axios from 'axios';
 import priv from './config';
 import UrlPaths from './urlpaths';
 
+var config_path = new UrlPaths();
+
 class App extends Component {
   constructor() {
     super();
     this.state = {
       query: '',
-      configuration: UrlPaths,
+      configuration: config_path,
     };
     //this.configuration = new UrlPaths().config;
   }

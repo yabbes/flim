@@ -2,7 +2,7 @@
 import axios from 'axios';
 import priv from './config';
 
-
+/*
 var UrlPaths = getPaths();
 
 function getPaths() {
@@ -20,6 +20,19 @@ function getPaths() {
 
 }
     
+*/
 
+export default function UrlPaths(){
 
-export default UrlPaths;
+    axios.get('https://api.themoviedb.org/3/configuration?api_key=' + priv.API_KEY)
+    .then(function (response) {
+    //iconsole.log(response.data.images);
+    //console.log(1);
+    this.data = response.data.images;
+    }.bind(this))
+    .catch(function (error) {
+    console.log(error);
+    });
+    //console.log(this.state);
+}
+    
