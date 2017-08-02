@@ -3,13 +3,16 @@ import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 import priv from './config';
+import UrlPaths from './urlpaths';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      query: ''
+      query: '',
+      configuration: UrlPaths,
     };
+    //this.configuration = new UrlPaths().config;
   }
   handleChange(event){
     console.log("change");
@@ -25,7 +28,7 @@ class App extends Component {
         </div>
         <p className="App-intro">
           <SearchBar handleChange={(event) => this.handleChange(event)}/>
-          <FilmList query={this.state.query}/>
+          <FilmList query={this.state.query} config={this.state.configuration}/>
         </p>
       </div>
     );
@@ -41,29 +44,15 @@ class FilmList extends Component {
       items: [],
       initialList: true,
       query: '',
-      configuration: {},
+      configuration: props.config,
       test: ''
     };
     
   }
 
-  getInitialConfiguration(){
-    //Get base url & file path etc from api
-    axios.get('https://api.themoviedb.org/3/configuration?api_key=' + priv.API_KEY)
-    .then(function (response) {
-      console.log(response.data.images);
-      this.setState({
-        configuration: response.data.images,
-        test: 'lala'
-      });
-    }.bind(this))
-    .catch(function (error) {
-      console.log(error);
-    });
-    console.log(this.state);
 
-  }
   getMovieList(name){
+    console.log(this);
     axios.get('https://api.themoviedb.org/3/discover/movie?api_key=' + priv.API_KEY)
     .then(function (response) {
       //console.log(priv.API_KEY);
@@ -74,6 +63,7 @@ class FilmList extends Component {
     .catch(function (error) {
       console.log(error);
     });
+    
     
   }
   searchFor(movie){
@@ -94,7 +84,8 @@ class FilmList extends Component {
     if (this.props.query !== ''){
       this.setState({
         initialList: false,
-        query: this.props.query
+        query: this.props.query,
+        configuration: 'lala',
       });
       let movie = this.props.query;
       //console.log('the movie is:' + movie);
@@ -105,7 +96,9 @@ class FilmList extends Component {
 
 
   componentDidMount() {
-    this.getInitialConfiguration();
+    
+
+    
     if (this.state.initialList) {
       this.getMovieList();
     }

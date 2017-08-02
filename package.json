@@ -2,7 +2,7 @@
   "name": "flim-base",
   "version": "0.1.0",
   "private": true,
-  "homepage": "etbim.de/flim/",
+  "homepage": ".",
   "dependencies": {
     "axios": "^0.16.2",
     "jquery": "^3.2.1",
