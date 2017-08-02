@@ -88,7 +88,6 @@ class FilmList extends Component {
       this.setState({
         initialList: false,
         query: this.props.query,
-        configuration: 'lala',
       });
       let movie = this.props.query;
       //console.log('the movie is:' + movie);
