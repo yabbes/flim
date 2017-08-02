@@ -39,7 +39,7 @@ class FilmList extends Component {
     this.state = {
       items: [],
       initialList: true,
-      query: props.query
+      query: ''
     };
   }
 
@@ -66,17 +66,18 @@ class FilmList extends Component {
     .catch(function (error) {
       console.log(error);
     });
-
   }
+
   componentWillReceiveProps(){
     //console.log(this);
     //console.log(this.props);
+    
     if (this.props.query !== ''){
       this.setState({
         initialList: false,
         query: this.props.query
       });
-      let movie = this.state.query;
+      let movie = this.props.query;
       //console.log('the movie is:' + movie);
       this.searchFor(movie);
 
@@ -112,10 +113,8 @@ class FilmList extends Component {
 class SearchBar extends Component{
   constructor(props){
     super()
-    this.state = {
-      query: ''
-    }
   }
+  
   /*
   onChange(event) {
     console.log(event);
