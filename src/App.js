@@ -11,7 +11,11 @@ class App extends Component {
       query: 'hal'
     };
   }
-
+  handleChange(event){
+    console.log("change");
+    this.setState({query: event.target.value});
+    console.log(this.state.query);
+  }
   render() {
     return (
       <div className="App">
@@ -20,6 +24,7 @@ class App extends Component {
           <h2>Welcome to Flim-base</h2>
         </div>
         <p className="App-intro">
+          <SearchBar handleChange={(event) => this.handleChange(event)}/>
           <FilmList query={this.state.query}/>
         </p>
       </div>
@@ -77,4 +82,28 @@ class FilmList extends Component {
       </div>
     )
   }
+}
+
+class SearchBar extends Component{
+  constructor(props){
+    super()
+    this.state = {
+      query: ''
+    }
+  }
+  /*
+  onChange(event) {
+    console.log(event);
+    this.setState({query: event.target.value});
+    console.log(this.state.query);
+  }
+  */
+
+  render() {
+    return (
+      <input placeholder="Enter your search" id="searchInput" className="search" onChange={(event) => this.props.handleChange(event) }>
+      </input>
+    )
+  }
+
 }
