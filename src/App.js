@@ -40,10 +40,29 @@ class FilmList extends Component {
     this.state = {
       items: [],
       initialList: true,
-      query: ''
+      query: '',
+      configuration: {},
+      test: ''
     };
+    
   }
 
+  getInitialConfiguration(){
+    //Get base url & file path etc from api
+    axios.get('https://api.themoviedb.org/3/configuration?api_key=' + priv.API_KEY)
+    .then(function (response) {
+      console.log(response.data.images);
+      this.setState({
+        configuration: response.data.images,
+        test: 'lala'
+      });
+    }.bind(this))
+    .catch(function (error) {
+      console.log(error);
+    });
+    console.log(this.state);
+
+  }
   getMovieList(name){
     axios.get('https://api.themoviedb.org/3/discover/movie?api_key=' + priv.API_KEY)
     .then(function (response) {
@@ -67,11 +86,10 @@ class FilmList extends Component {
     .catch(function (error) {
       console.log(error);
     });
+    //console.log(this.state.items);
   }
 
   componentWillReceiveProps(){
-    //console.log(this);
-    //console.log(this.props);
     
     if (this.props.query !== ''){
       this.setState({
@@ -84,11 +102,14 @@ class FilmList extends Component {
 
     }
   }
+
+
   componentDidMount() {
-    //console.log(this.props);
+    this.getInitialConfiguration();
     if (this.state.initialList) {
       this.getMovieList();
     }
+    //console.log(this.state.configuration);
     
     
     
