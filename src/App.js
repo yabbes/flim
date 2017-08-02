@@ -5,6 +5,12 @@ import $ from 'jquery';
 import axios from 'axios';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      query: 'hal'
+    };
+  }
 
   render() {
     return (
@@ -14,7 +20,7 @@ class App extends Component {
           <h2>Welcome to Flim-base</h2>
         </div>
         <p className="App-intro">
-          <FilmList query={''}/>
+          <FilmList query={this.state.query}/>
         </p>
       </div>
     );
@@ -52,6 +58,7 @@ class FilmList extends Component {
     if (this.state.initialList) {
       this.getMovieList();
     }
+    console.log(this);
     
 
   }
