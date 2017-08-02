@@ -10,19 +10,37 @@
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
+  background: #070000;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #070000, #4C0001, #070000);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #070000, #4C0001, #070000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  height: 120px;
   padding: 20px;
+  font-family: 'PT Sans', sans-serif;
   margin-bottom:20px;
   color: white;
 }
+.title{
+  font-family: 'Bowlby One SC', cursive;;
+}
 
+.subtitle{
+  font-family: 'Poppins', sans-serif;
+}
+
+.lang {
+  font-family: 'Josefin Sans', sans-serif;
+}
 .App-intro {
   font-size: large;
 }
 
 .film-wrapper{
   display: inline;
+}
+
+.poster{
+  margin-bottom: 40px;
 }
 
 @keyframes App-logo-spin {

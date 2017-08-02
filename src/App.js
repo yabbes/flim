@@ -122,7 +122,7 @@ class FilmList extends Component {
               <p className="subtitle">{item.original_title} </p>
               <span className="badge lang">{item.original_language} </span>
             <br />
-            <img src={this.state.configuration.data.base_url + this.state.configuration.data.backdrop_sizes[0]+ '/'+ item.poster_path} alt=""/>
+            <img className="poster" src={this.state.configuration.data.base_url + this.state.configuration.data.backdrop_sizes[0]+ '/'+ item.poster_path} alt=""/>
             </div>) 
             : <div>Loading...</div>
           }
