@@ -57,7 +57,7 @@ class FilmList extends Component {
     console.log(this);
     axios.get('https://api.themoviedb.org/3/discover/movie?api_key=' + priv.API_KEY)
     .then(function (response) {
-      //console.log(priv.API_KEY);
+      console.log(response.data.results);
       this.setState({
         items: response.data.results
       })
@@ -71,6 +71,7 @@ class FilmList extends Component {
   searchFor(movie){
     axios.get('https://api.themoviedb.org/3/search/movie?query=' + movie + '&api_key=' + priv.API_KEY)
     .then(function (response) {
+      
       this.setState({
         items: response.data.results
       })
@@ -117,7 +118,7 @@ class FilmList extends Component {
       <div> <h2>Filmliste:</h2>
         <ul>
           {this.state.items.length ?
-          	this.state.items.map(item=><li key={item.id}>{item.title} <img src={this.state.configuration.data.base_url + this.state.configuration.data.backdrop_sizes[0]+ '/'+ item.file_path} alt=""/>
+          	this.state.items.map(item=><li key={item.id}>{item.title} <img src={this.state.configuration.data.base_url + this.state.configuration.data.backdrop_sizes[0]+ '/'+ item.poster_path} alt=""/>
             </li>) 
             : <li>Loading...</li>
           }
