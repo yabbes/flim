@@ -54,7 +54,7 @@ class FilmList extends Component {
 
 
   getMovieList(name){
-    console.log(this);
+    console.log("Movie List");
     axios.get('https://api.themoviedb.org/3/discover/movie?api_key=' + priv.API_KEY)
     .then(function (response) {
       console.log(response.data.results);
@@ -114,15 +114,20 @@ class FilmList extends Component {
 // let b_url = this.state.configuration.data.base_url
   render() {
     return (
-      <div> <h2>Filmliste:</h2>
-        <ul>
+      <div className="container"> <h2>Filmliste:</h2>
+        <div className="row film-wrapper">
           {this.state.items.length ?
-          	this.state.items.map(item=><li key={item.id}>{item.title} <img src={this.state.configuration.data.base_url + this.state.configuration.data.backdrop_sizes[0]+ '/'+ item.poster_path} alt=""/>
-            </li>) 
-            : <li>Loading...</li>
+          	this.state.items.map(item=><div className="col-md-4 film-item" key={item.id}>
+              <p className="title">{item.title} </p>
+              <p className="subtitle">{item.original_title} </p>
+              <span className="badge lang">{item.original_language} </span>
+            <br />
+            <img src={this.state.configuration.data.base_url + this.state.configuration.data.backdrop_sizes[0]+ '/'+ item.poster_path} alt=""/>
+            </div>) 
+            : <div>Loading...</div>
           }
      
-        </ul>
+        </div>
       </div>
     )
   }
